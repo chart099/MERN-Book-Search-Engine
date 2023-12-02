@@ -30,13 +30,27 @@ const resolvers = {
               return { token, user };
         },
 
-        saveBook: async(parent, {title})=> {
-            const book = await Book.findOne({title});
-            if(!book){
-                
+        saveBook: async(parent, {bookId}, context)=> {
+            await User.findOneAndUpdate(
+                { _id: context.user._id },
+                 { $addToSet: { savedBooks: bookId } } )
+        },
+
+        deleteBook: async(parent, {bookId}, context)=> {
+            if (context.user) {
+                const user = await User.findByIdAndUpdate(
+                    {_id: bookId},
+                    {
+                        $pull: {savedBooks: bookId.bookId}
+                    }
+                )
             }
         }
+
     }
+
+       
+    
 }
 
 
