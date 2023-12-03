@@ -31,30 +31,20 @@ const resolvers = {
         },
 
         saveBook: async(parent, {bookId}, context)=> {
-            await User.findOneAndUpdate(
+            return await User.findOneAndUpdate(
                 { _id: context.user._id },
                  { $addToSet: { savedBooks: bookId } } )
         },
 
         deleteBook: async(parent, {bookId}, context)=> {
             if (context.user) {
-                const user = await User.findByIdAndUpdate(
-                    {_id: bookId},
-                    {
-                        $pull: {savedBooks: bookId.bookId}
-                    }
+                return await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { savedBooks: bookId } },
+                    { new: true }
                 )
             }
         }
 
-    }
-
-       
-    
+    }  
 }
-
-
-// createUser( username: String! email: String! password: String!): Auth
-// login(username: String! password: String!): Auth
-// saveBook(title: String!): Book
-// deleteBook(bookId: ID!): Book
