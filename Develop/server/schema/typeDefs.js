@@ -4,7 +4,7 @@ const typeDefs = `{
         username: String!
         email: String!
         password: String!
-        bookCount: Number
+        bookCount: Int
         savedBooks: [Book]
     }
 
@@ -20,7 +20,7 @@ const typeDefs = `{
 
     type Auth {
         token: ID!
-        user: [User]
+        user: User
     }
 
     type Query {
