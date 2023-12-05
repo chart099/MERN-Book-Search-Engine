@@ -24,14 +24,14 @@ const typeDefs = `{
     }
 
     type Query {
-        users(username: String!): User
+        me: User
     }
 
     type Mutation {
         createUser( username: String!, email: String!, password: String!): Auth
         login(username: String!, password: String!): Auth
-        saveBook(title: String!): Book
-        deleteBook(bookId: ID!): Book
+        saveBook(title: String!): User
+        deleteBook(bookId: ID!): User
     }
 }`
 
