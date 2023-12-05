@@ -4,11 +4,16 @@ import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
 
+import { useMutation } from '@apollo/client';
+import { LOGIN_USER, ADD_USER } from '../utils/mutations'
 import Auth from '../utils/auth';
 
 const AppNavbar = () => {
   // set modal display state
   const [showModal, setShowModal] = useState(false);
+
+  const [loginUser] = useMutation(LOGIN_USER);
+  const [addUser] = useMutation(ADD_USER);
 
   return (
     <>
